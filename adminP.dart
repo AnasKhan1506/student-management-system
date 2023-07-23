@@ -77,14 +77,35 @@ addStudent() {
 }
 
 viewStudents() {
-  if (students.isEmpty) {
-    print("No students found.");
-  } else {
-    for (var i = 0; i < students.length; i++) {
-      print("$i. Student: ${students[i]}");
+  print("In Order To see Student details");
+  stdout.write("Enter Your roll no:");
+  var studentRollNo = stdin.readLineSync();
+  bool found = false;
+  for (var student in students) {
+    if (student["Student Roll No"] == studentRollNo) {
+      print("Student Details:");
+      print("Student Name:${student["Student Name"]}");
+      found = true;
+      break;
     }
   }
 }
+
+  // var viewStudent =
+  //     students.where((e) => e["Student Roll No"] == studentRollNo).toList();
+  // if (viewStudent.isNotEmpty) {
+  //   print("Student Details:");
+  //   for (var students in viewStudent) {
+  //     print("Student Name: ${students["studentName"]}");
+  //   }
+  // }
+
+  //  else {
+  //   for (var i = 0; i < students.length; i++) {
+  //     print("$i. Student: ${students[i]}");
+  //   }
+  // }
+
 
 /*import 'dart:io';
 
