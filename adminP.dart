@@ -33,13 +33,11 @@ void adminlogin() {
         if (option == "1") {
           addStudent();
         } else if (option == "2") {
-          // Implement updateStudent() logic
-          print("Update Student option selected");
+          updateStudent();
         } else if (option == "3") {
           viewStudents();
         } else if (option == "4") {
-          // Implement deleteStudent() logic
-          print("Delete Student option selected");
+          deleteStudent();
         } else if (option == "5") {
           print("Exiting...");
           break;
@@ -77,19 +75,155 @@ addStudent() {
 }
 
 viewStudents() {
-  print("In Order To see Student details");
-  stdout.write("Enter Your roll no:");
+  print("Enter the Student Roll No to view details:");
   var studentRollNo = stdin.readLineSync();
+
   bool found = false;
   for (var student in students) {
     if (student["Student Roll No"] == studentRollNo) {
+      //List k andr access krrhy
       print("Student Details:");
-      print("Student Name:${student["Student Name"]}");
+      print("Student Name: ${student["Student Name"]}");
+      print(
+          "Student Roll No: ${student["Student Roll No"]}"); // yh 3no value list k andr map ki form m store hui vi
+      print("Student Grade: ${student["Student Grade"]}");
       found = true;
       break;
     }
   }
+
+  if (!found) {
+    print("Student with Roll No '$studentRollNo' not found.");
+  }
 }
+
+void updateStudent() {
+  print("Current List of Students:");
+  for (var student in students) {
+    print(student["Student Name"]);
+  }
+
+  var option = '';
+  while (option != "3") {
+    print("What You Want To Update?");
+    print("press 1 for name :");
+    print("press 2 for roll no :");
+    print("press 3 for grade :");
+
+    stdout.write("Enter your Option : ");
+    var option1 = stdin.readLineSync()!;
+    if (option1 == "1") {
+      print("Current List of Names:");
+      for (var student in students) {
+        print(student["Student Name"]);
+      }
+
+      //print("What name do you want to update?");
+      var oldName = stdin.readLineSync()!;
+
+      var studentToUpdateIndex =
+          students.indexWhere((student) => student["Student Name"] == oldName);
+
+      if (studentToUpdateIndex != -1) {
+        stdout.write("Enter the new name: ");
+        var newName = stdin.readLineSync()!;
+        students[studentToUpdateIndex]["Student Name"] = newName;
+        print("The name has been updated!");
+
+        print("Updated List of Students:");
+        for (var student in students) {
+          print(student["Student Name"]);
+        }
+      } else {
+        print("Student with the name '$oldName' not found in the list.");
+      }
+    }
+  }
+}
+
+deleteStudent() {
+  print("Enter the Student Roll No to Delete his  Records:");
+  var studentNo = stdin.readLineSync();
+  bool found = false;
+  for (var student in students) {
+    if (student["Student Roll No"] == studentNo) {
+      //List k andr access krrhy
+      print("The record is deleting!");
+
+      print(" ${student["Student Name"]}");
+      print(
+          " ${student["Student Roll No"]}"); // yh 3no value list k andr map ki form m store hui vi
+      print(" ${student["Student Grade"]}");
+      print("The record has been deleted");
+      students
+          .removeWhere((element) => student["Student Roll No"] == studentNo);
+      found = true;
+      break;
+    }
+  }
+
+  if (!found) {
+    print("Student with Roll No '$studentNo' not found.");
+  }
+}
+// updateStudent() {
+//   var option = "";
+//   print(students);
+//   // print("What You Want To Update?");
+//   // print("press 1 for name :");
+//   // print("press 2 for roll no :");
+//   // print("press 3 for grade :");
+//   // var option = '';
+//   while (option != "3") {
+//     print("What You Want To Update?");
+//     print("press 1 for name :");
+//     print("press 2 for roll no :");
+//     print("press 3 for grade :");
+
+//     stdout.write("Enter your Option : ");
+//     var option1 = stdin.readLineSync()!;
+//     if (option == "1") {
+//       for (var list in students) {
+//         print(list["Student Name"]);
+//       }
+//       print("What name You want to update");
+//       if (option1 == students["Student Name"])
+//       students.remove("Student Name");
+//       var new_Name = stdin.readLineSync();
+//       students.add(new_Name);
+//       print("The List has been updated");
+//       print(students);
+//     }
+//   }
+// }
+  // print("Enter Student Name:");
+  // var studentName = stdin.readLineSync();
+  // print("Enter Student Roll No:");
+  // var studentRollNo = stdin.readLineSync();
+  // print("Enter Student Grade:");
+  // var studentGrade = stdin.readLineSync();
+
+  // var student = {
+  //   "Student Name": studentName,
+  //   "Student Roll No": studentRollNo,
+  //   "Student Grade": studentGrade
+  // };
+
+  // students.add(student);
+  // print("Student added successfully!");
+// viewStudents() {
+//   print("In Order To see Student details");
+//   stdout.write("Enter Your roll no:");
+//   var studentRollNo = stdin.readLineSync();
+//   bool found = false;
+//   for (var student in students) {
+//     if (student["Student Roll No"] == studentRollNo) {
+//       print("Student Details:");
+//       print("Student Name:${student["Student Name"]}");
+//       found = true;
+//       break;
+//     }
+//   }
 
   // var viewStudent =
   //     students.where((e) => e["Student Roll No"] == studentRollNo).toList();
