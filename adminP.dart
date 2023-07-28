@@ -255,14 +255,15 @@ void deleteStudent() {
       print("Student Roll No: ${student["Student Roll No"]}");
       print("Student Grade: ${student["Student Grade"]}");
       print("The record has been deleted");
-      students
-          .removeWhere((element) => student["Student Roll No"] == studentNo);
       found = true;
       break;
     }
   }
 
-  if (!found) {
+  if (found) {
+    students.removeWhere((element) => element["Student Roll No"] == studentNo);
+    // Update the students list by removing the deleted student record
+  } else {
     print("Student with Roll No '$studentNo' not found.");
   }
 }
