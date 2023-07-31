@@ -8,7 +8,7 @@ teacherlogin() {
   stdout.write("Enter Password :");
   var password = stdin.readLineSync()!;
 
-  if (username == "Teacher" && password == "123") {
+  if (username == "teacher" && password == "123") {
     print("Successfully login");
     print(" =======WELCOME=======");
     print("Select from options given below:");
@@ -62,7 +62,7 @@ attendanceMain() {
         break;
 
       case 2:
-        print('View Attandance');
+        viewAttendance();
         break;
 
       case 3:
@@ -72,23 +72,36 @@ attendanceMain() {
   }
 }
 
+List attendanceSheet = [];
+
 markAttendance() {
-  String name;
-  int roll;
-  var Present;
-  Map<int, dynamic> Students = {};
+  print('Enter  Name :');
+  var name = stdin.readLineSync()!;
+  print('Enter Roll No :');
+  var roll = stdin.readLineSync()!;
+  print('Enter your choice From ( P/A) : ');
+  var present = stdin.readLineSync()!;
 
-  stdout.write('Enter Name :');
-  name = stdin.readLineSync()!;
-
-  stdout.write('Enter Roll No :');
-  roll = int.parse(stdin.readLineSync()!);
-
-  stdout.write('Enter your choice From ( P/A) : ');
-  Present = stdin.readLineSync()!;
-
-  var Attendance = Students;
-  Attendance[roll] = Students;
+  var attendance = {
+    "Student name": name,
+    "Student Roll no": roll,
+    "Student Present": present
+  };
+  attendanceSheet.add(attendance);
 
   print('Attendance marked successfully for $name (Roll No: $roll)');
+}
+
+viewAttendance() {
+  if (attendanceSheet.isEmpty) {
+    print("No Student added yet");
+  } else {
+    print("Attendance Sheet:");
+    for (var student in attendanceSheet) {
+      print("Student Name: ${student["Student name"]}");
+      print("Student Roll No: ${student["Student Roll no"]}");
+      print("Student Attendance: ${student["Student Present"]}");
+      print("=============================");
+    }
+  }
 }
