@@ -24,8 +24,7 @@ teacherlogin() {
         attendanceMain(); // idhr view attendance ka fuction bana kr call krdein ge
         break;
       case '2':
-        print(
-            "View Marksheet"); // idhr view marksheet ka fuction bana kr call krdein ge
+        makeResult(); // idhr view marksheet ka fuction bana kr call krdein ge
         break;
       case '3':
         print(
@@ -66,7 +65,7 @@ attendanceMain() {
         break;
 
       case 3:
-        print('Exit');
+        T = false;
         break;
     }
   }
@@ -105,3 +104,159 @@ viewAttendance() {
     }
   }
 }
+
+void makeResult() {
+  List<Map<String, dynamic>> studentsData = [];
+
+  while (true) {
+    print('Enter student name:');
+    String? studentName = stdin.readLineSync();
+    if (studentName == null || studentName.trim().isEmpty) {
+      print('Invalid input. Please enter a valid student name.');
+      continue;
+    }
+
+    print('Enter roll number:');
+    int? rollNumber = int.tryParse(stdin.readLineSync()!);
+    if (rollNumber == null) {
+      print('Invalid input. Please enter a valid roll number.');
+      continue;
+    }
+
+    print('Enter marks for Maths:');
+    int? mathematics = int.tryParse(stdin.readLineSync()!);
+    if (mathematics == null) {
+      print('Invalid input. Please enter a valid marks value for Maths.');
+      continue;
+    }
+
+    print('Enter marks for Science:');
+    int? science = int.tryParse(stdin.readLineSync()!);
+    if (science == null) {
+      print('Invalid input. Please enter a valid marks value for Science.');
+      continue;
+    }
+
+    print('Enter marks for English:');
+    int? english = int.tryParse(stdin.readLineSync()!);
+    if (english == null) {
+      print('Invalid input. Please enter a valid marks value for English.');
+      continue;
+    }
+
+    print('Enter marks for Social Studies:');
+    int? sst = int.tryParse(stdin.readLineSync()!);
+    if (sst == null) {
+      print(
+          'Invalid input. Please enter a valid marks value for Social Studies.');
+      continue;
+    }
+
+    print('Enter marks for Urdu:');
+    int? urdu = int.tryParse(stdin.readLineSync()!);
+    if (urdu == null) {
+      print('Invalid input. Please enter a valid marks value for Urdu.');
+      continue;
+    }
+
+    var totalMarks = mathematics + science + english + sst + urdu;
+    var percentage = (totalMarks / 500) * 100;
+
+    studentsData.add({
+      'Student Name': studentName,
+      'Roll Number': rollNumber,
+      'MATHS': mathematics,
+      'SCIENCE': science,
+      'ENGLISH': english,
+      'SOCIAL STUDIES': sst,
+      'URDU': urdu,
+      'Percentage': percentage,
+    });
+
+    print('Marks entered successfully!');
+
+    print('---------------------------------------');
+    print('Do you want to continue? (Y/N)');
+    String choice = stdin.readLineSync()!;
+    if (choice == 'N') {
+      break;
+    }
+  }
+
+  // Displaying data in tabular form
+  print('\n');
+  print(
+      '--------------------------------------------------------------------------------------------------------------------------');
+  print(
+      'Student Name\tRoll Number\tMaths\tScience\tEnglish\tSocial Studies\tUrdu\tPercentage');
+  print(
+      '-------------------------------------------------------------------------------------------------------------------------');
+  for (var student in studentsData) {
+    print(
+        '${student['Student Name']}\t\t${student['Roll Number']}\t\t${student['MATHS']}\t${student['SCIENCE']}\t${student['ENGLISH']}\t\t${student['SOCIAL STUDIES']}\t${student['URDU']}\t${student['Percentage'].toStringAsFixed(2)}%');
+  }
+  print(
+      '-------------------------------------------------------------------------------------------------------------------------');
+}
+
+// makeResult() {
+//   // teacher panel mein makeresult ki logic hai..
+
+//   while (true) {
+//     List makeresult = [];
+
+//     print('Enter student name:');
+//     String studentName = stdin.readLineSync()!;
+
+//     print('Enter roll number:');
+//     int rollNumber = int.parse(stdin.readLineSync()!);
+
+//     print('Enter marks for Maths:');
+//     int mathematics = int.parse(stdin.readLineSync()!);
+
+//     print('Enter marks for Science:');
+//     int science = int.parse(stdin.readLineSync()!);
+
+//     print('Enter marks for English:');
+//     int english = int.parse(stdin.readLineSync()!);
+
+//     print('Enter marks for Social Studies:');
+//     int sst = int.parse(stdin.readLineSync()!);
+
+//     print('Enter marks for Urdu:');
+//     int urdu = int.parse(stdin.readLineSync()!);
+//     var total_marks = mathematics + science + english + sst + urdu;
+//     var percentage = total_marks / 5;
+//     percentage * 100;
+//     print("the percentage of $studentName is $percentage");
+//     var students = {
+//       "Student Name": studentName,
+//       'Roll Number': rollNumber,
+//       'MATHS': mathematics,
+//       'SCIENCE': science,
+//       'ENGLISH': english,
+//       'SOCIALSTUDIES': sst,
+//       'URDU': urdu,
+//     };
+//     makeresult.add(students);
+//     print('Marks entered successfully!');
+
+//     print('---------------------------------------');
+//     print('Do To Want To Continue ? (Y/N)');
+//     String choice = stdin.readLineSync()!;
+//     if (choice == 'Y') {
+//       break; //yahan pe y pe code dobara chale gaw new entry ky liye...
+//     } else if (choice == "N") {
+//       // print('\n');
+//       // print('---------------------------------------------------------');
+//       // print(
+//       //     'Student Name        Roll Number        Maths       Science        English        Social Studies        Urdu        Percentage');
+//       // print('---------------------------------------------------------');
+//       for (var student in makeresult) {
+//         print(
+//             'Student Name :${student['Student Name']}Student Roll No:${student['Roll Number']}Student Marks:${student['MATHS']}${student['SCIENCE']}${student['ENGLISH']}${student['SOCIAL STUDIES']}${student['URDU']}${student['Percentage']}');
+//       }
+//       print('---------------------------------------------------------');
+//     }
+//   }
+// }
