@@ -105,9 +105,8 @@ viewAttendance() {
   }
 }
 
+List<Map<String, dynamic>> studentsData = [];
 void makeResult() {
-  List<Map<String, dynamic>> studentsData = [];
-
   while (true) {
     print('Enter student name:');
     String? studentName = stdin.readLineSync();
