@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'adminP.dart';
 
 teacherlogin() {
   print("=====Hello Welcome To Teachers Portal=====");
@@ -7,36 +8,35 @@ teacherlogin() {
 
   stdout.write("Enter Password :");
   var password = stdin.readLineSync()!;
-
-  if (username == "teacher" && password == "123") {
-    print("Successfully login");
-    print(" =======WELCOME=======");
-    print("Select from options given below:");
-    print("1.Attendance");
-    print("2.Make Marksheet");
-    print("3.Add Student");
-    print("4.View Students");
-
-    stdout.write("Enter your Option :");
-    var Option = stdin.readLineSync()!;
-    switch (Option) {
-      case '1':
-        attendanceMain(); // idhr view attendance ka fuction bana kr call krdein ge
+  print("Successfully login");
+  bool cond = true;
+  while (cond = true) {
+    if (username == "teacher" && password == "123") {
+      print(" =======WELCOME=======");
+      print("Select from options given below:");
+      print("1.Attendance");
+      print("2.Make Marksheet");
+      print("3.Add Student");
+      print("4.View Students");
+      print("5.Exit");
+      stdout.write("Enter your Option :");
+      var option = stdin.readLineSync()!;
+      if (option == "1") {
+        markAttendance();
+      } else if (option == "2") {
+        makeResult();
+      } else if (option == "3") {
+        addStudent();
+      } else if (option == "4") {
+        viewStudents(students);
+      } else if (option == "5") {
+        print("Exiting...");
         break;
-      case '2':
-        makeResult(); // idhr view marksheet ka fuction bana kr call krdein ge
-        break;
-      case '3':
-        print(
-            "Student Added"); // idhr add student ka fuction bana kr call krdein ge
-        break;
-      case '4':
-        print(
-            "View Students"); // idhr view student ka fuction bana kr call krdein ge
-        break;
+      }
+    } else {
+      print("Invalid Key");
+      cond = false;
     }
-  } else {
-    print("Invalid Key");
   }
 }
 
